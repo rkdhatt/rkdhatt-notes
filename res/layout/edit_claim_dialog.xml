@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditClaimActivity" >
+
+    <TextView
+        android:id="@+id/editClaimTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/edit_cname_string"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editClaimName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editClaimTextView"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/new_cname_string" />
+
+    <EditText
+        android:id="@+id/editFromDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editClaimName"
+        android:ems="10"
+        android:inputType="date"
+        android:text="@string/new_from_string" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editToDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editFromDateText"
+        android:ems="10"
+        android:inputType="date"
+        android:text="@string/new_to_string" />
+
+    <EditText
+        android:id="@+id/editClaimInfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editToDateText"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/edit_cinfo_string" />
+
+</RelativeLayout>

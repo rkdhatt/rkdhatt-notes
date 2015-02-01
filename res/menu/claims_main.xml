@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.rkdhatt_notes.ClaimsMainActivity" >
+    <item android:id="@+id/editClaimOption" android:title="@string/title_activity_edit_claim" android:onClick="editClaim"></item>
+    <item android:id="@+id/deleteClaimOption" android:title="@string/title_activity_delete_claim" android:onClick="deleteClaim"></item>
+    <item android:id="@+id/claim_action_settings" android:title="Change Claim Status"></item>
+
+</menu>

@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.rkdhatt_notes.ClaimInfoActivity" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+    <item android:id="@+id/statusSubmitted" android:onClick="submitClaim" android:title="@string/submit_string"></item>
+    <item android:id="@+id/statusApproved" android:title="@string/approved_string" android:onClick="approveClaim"></item>
+    <item android:id="@+id/statusReturned" android:title="@string/returned_string" android:onClick="returnClaim"></item>
+    <item android:id="@+id/emailClaim" android:title="@string/email_string"></item>
+
+</menu>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ExpenseTracker</string>
+    <string name="my_name">rkdhatt</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_settings2">Claim Settings</string>
+    <string name="title_activity_claims_main">Claims</string>
+    <string name="title_expenses_of_claims">Expenses of Selected Claim</string>
+    <string name="welcome_title">Welcome</string>
+    <string name="expense_info_string">Expenses of Selected Claim:</string>
+    <string name="add_expense_string">Add Expense Item</string>
+    <string name="choose_claim_string">Choose A Claim:</string>
+    <string name="add_claim_string">Add Claim</string>
+    <string name="edit_cname_string">Edit Claim</string>
+    <string name="add_claim_string2">Add New Claim</string>
+    <string name="claim_name_string">Enter Claim Name</string>
+    <string name="new_cname_string">New Claim Name</string>
+    <string name="delete_claim_string">Choose Claim To Delete:</string>
+    <string name="edit_claim_string">Choose Claim To Edit:</string>
+    <string name="add_from_string">Enter From Date (DD/MM/YYYY)</string>
+    <string name="new_from_string">New From Date (DD/MM/YYYY)</string>
+    <string name="add_to_string">Enter To Date (DD/MM/YYYY)</string>
+    <string name="new_to_string">Enter To Date (DD/MM/YYYY)</string>
+    <string name="describe_claim_string">Describe Claim</string>
+    <string name="edit_cinfo_string">Edit Description</string>
+    <string name="submit_string">Submit Claim</string>
+    <string name="approved_string">Approve Claim</string>
+    <string name="returned_string">Return Claim</string>
+    <string name="email_string">Email Claim</string>
+    <string name="name_column_str">Name</string>
+    <string name="status_column_str">Status</string>
+    <string name="curr_column_str">Currency</string>
+    <string name="ex_date_str">Date</string>
+    <string name="ex_name_str">Name</string>
+    <string name="ex_curr_str">Currency</string>
+    <string name="ex_cat_str">Category</string>
+    <string name="ex_info_str">Description</string>
+    <string name="ex_add_title_str">Add New Expense:</string>
+    <string name="selected_cat"></string>
+    <string name="selected_curr"></string>
+    <string name="ex_add_price">Price</string>
+
+    <string-array name="category_array">
+        <item>Air Fare</item>
+        <item>Ground Transport</item>
+        <item>Vehicle Rental</item>
+        <item>Fuel</item>
+        <item>Parking</item>
+        <item>Registration</item>
+        <item>Accommodation</item>
+        <item>Meal</item>
+        <item>Other Category</item>
+    </string-array>
+    <string-array name="currency_array">
+        <item>CA</item>
+        <item>US</item>
+        <item>GBP</item>
+        <item>EUR</item>
+    </string-array>
+
+    <string name="title_activity_claim_info">Information For Selected Claim</string>
+    <string name="title_activity_edit_claim">Edit Claim</string>
+    <string name="title_activity_delete_claim">Delete Claim</string>
+    <string name="title_activity_edit_expense">Edit Expense</string>
+    <string name="title_activity_delete_expense">Delete Expense</string>
+    <string name="delete_expense_string">Choose Expense To Delete:</string>
+    <string name="ex_edit_title_str">Edit Expense:</string>
+    <string name="title_activity_change_status">Change Claim Status</string>
+    <string name="title_activity_email">Email Claim Info</string>
+
+</resources>

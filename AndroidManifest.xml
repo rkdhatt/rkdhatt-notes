@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.rkdhatt_notes"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo" >
+        <activity
+            android:name="com.example.rkdhatt_notes.MainActivity"
+            android:label="@string/my_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.rkdhatt_notes.ClaimsMainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.rkdhatt_notes.ClaimInfoActivity"
+            android:label="@string/title_activity_claim_info" >
+        </activity>
+        <activity
+            android:name="com.example.rkdhatt_notes.EditClaimActivity"
+            android:label="@string/title_activity_edit_claim" >
+        </activity>
+        <activity
+            android:name="com.example.rkdhatt_notes.DeleteClaimActivity"
+            android:label="@string/title_activity_delete_claim" >
+        </activity>
+        <activity
+            android:name="com.example.rkdhatt_notes.EditExpenseActivity"
+            android:label="@string/title_activity_edit_expense" >
+        </activity>
+        <activity
+            android:name="com.example.rkdhatt_notes.DeleteExpenseActivity"
+            android:label="@string/title_activity_delete_expense" >
+        </activity>
+        <activity
+            android:name="com.example.rkdhatt_notes.ChangeStatusActivity"
+            android:label="@string/title_activity_change_status" >
+        </activity>
+        <activity
+            android:name="com.example.rkdhatt_notes.EmailActivity"
+            android:label="@string/title_activity_email" >
+        </activity>
+    </application>
+
+</manifest>

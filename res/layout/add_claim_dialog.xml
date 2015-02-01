@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClaimsMainActivity" >
+
+    <TextView
+        android:id="@+id/addClaimTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/add_claim_string2"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/addClaimName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/addClaimTextView"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/claim_name_string" />
+
+    <EditText
+        android:id="@+id/fromDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/addClaimName"
+        android:ems="10"
+        android:inputType="date"
+        android:text="@string/add_from_string" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/toDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fromDateText"
+        android:ems="10"
+        android:inputType="date"
+        android:text="@string/add_to_string" />
+
+    <EditText
+        android:id="@+id/claimDescriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toDateText"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/describe_claim_string" />
+
+</RelativeLayout>
