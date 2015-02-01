@@ -1,5 +1,5 @@
-/* A main activity for list of claims and adding new claims
- * 
+/* A main activity for list of claims and adding new claims, 
+ * allows user to go to edit and delete acitivty to edit/delete claims
  * 
  * 
  * Copyright (C) 2015 Ramandeep Dhatt rkdhatt@ulberta.ca
@@ -171,13 +171,13 @@ public class ClaimsMainActivity extends Activity {
 	
 
 	public void editClaim (MenuItem menu) {
-		// nothing for now
+		// go to EditClaimActivity to edit a claim
 		Intent intent = new Intent(ClaimsMainActivity.this, EditClaimActivity.class);
 		startActivity(intent);
 	}
 	
 	public void deleteClaim (MenuItem menu){
-		// nothing for now
+		// go to DeleteClaimActivity to delete a claim
 		Intent intent = new Intent(ClaimsMainActivity.this, DeleteClaimActivity.class);
 		startActivity(intent);
 	}
