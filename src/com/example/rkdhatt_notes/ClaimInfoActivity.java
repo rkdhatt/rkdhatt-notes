@@ -1,10 +1,13 @@
 /* An activity for expenses of corresponding claims and settings regarding claim status,
  * email claim information, edit/delete claims, and add/edit/delete expenses.
  * 
- * Problems: Saving expenses and updating the listview is still an issue. Also, for some reason when editing one expense,
- * the rest of the expenses save th same changes. Still need to fix. This results in sending only claim information and
- * not expense infomation once you leave the app and come back to the ClaimInfoActivity. This also results in changing statuses of claims
+ * Problems: 
+ * 1. Saving expenses and updating the listview is still an issue. 
+ * 2. For some reason when editing one expense, the rest of the expenses save the same changes. Still need to fix. 
+ * This results in sending only claim information and not expense infomation once you leave the app and come back 
+ * to the ClaimInfoActivity. This also results in changing statuses of claims
  * to not be saved throughout all activities, even though I have used toasts to show that changes have occurred.
+ * 3. Still need to install k9-5.002-release.apk in order to send emails instead of SMS.
  * 
  * Copyright (C) 2015 Ramandeep Dhatt rkdhatt@ulberta.ca
  * 
@@ -52,7 +55,7 @@ import android.widget.Toast;
 public class ClaimInfoActivity extends Activity implements OnItemSelectedListener{
 	private String cat_selected;
 	private String curr_selected;
-	private static Claim selected_claim;
+	private Claim selected_claim;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		setContentView(R.layout.claim_info);
 		ClaimListManager.initManager(this.getApplicationContext());
 		
-		// Gab selected claim from ClaimsMainActivity.java
+		// Grab selected claim from ClaimsMainActivity.java
 		Intent intent = getIntent();
 		selected_claim = (Claim) intent.getSerializableExtra("selected claim");
 		
@@ -97,56 +100,60 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 			
 		});
 		
-		// Clicking on expense, show choices for user to edit/delete claim, or cancel changes.
+		// Clicking on expense, show dialog of choices for user to edit/delete claim, or cancel changes.
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-				
+				// grab expense item clicked on from its position
 				final Expense expense = expenseList.get(position);
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimInfoActivity.this);
 				builder.setMessage("Edit or Delete Expense?");
 				builder.setPositiveButton("Edit Expense", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
+				        	   // go to this method to edit expense information
 								sendEditExpenseMessage(expense);
 				           }
 				       });
 				
 				builder.setNeutralButton("Delete Expense", new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
+			        	   // go to this method to delete this expense
 							sendDeleteExpenseMessage(expense);
 			           }
 			       });
 				builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
+				        	   // Cancel
 				        	   dialog.cancel();
 				           }
 				       });
 
-				// Create the AlertDialog
 				AlertDialog dialog = builder.create();
 				dialog.show();
 			}
 			
 		});
 		
-		// Email Claim information button -> EmailActivity.java
+		// Email Claim information button Listener
 		// Source: http://stackoverflow.com/questions/8284706/send-email-via-gmail 2015-01-31
 	    Button sendBtn = (Button) findViewById(R.id.emailButton);
 	    sendBtn.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View view) {
 	     		String message = "";
 	   	  		ArrayList<String> claim_info = new ArrayList<String>();
+	   	  		// First item in claim_info list is the claim infor mation without expenses
 	   	  		claim_info.add("Claim name: \n"+selected_claim.getClaimName()+" \n"+"Claim start date: \n"+selected_claim.getFromDate()+" \n"
 	   	  				+"Claim end date: \n"+selected_claim.getToDate()+" \n"+"Claim Description: \n"+
 	   	  				selected_claim.getClaimDescription()+" \n\n"+"Expenses: \n");
 	    	    		
 	    	    ArrayList<Expense> expenseList = selected_claim.getExpenseList();
 	    	    
-	    	    Toast.makeText(ClaimInfoActivity.this, 
-  	    	          Float.valueOf(expenseList.size()).toString(), Toast.LENGTH_SHORT).show();
+	    	    // **Used toast to check if expenses are added (which they are), but it doesn't get saved if you go back
+	    	    // to ClaimsMainActivity and then come back to this activity.
 	    	    for (int i = 0; i < expenseList.size(); i++) {
+	    	    	// For each expense in the expense list, append it as a string
 	    	    	Expense expense = expenseList.get(i);
 	    	    	claim_info.add("Expense name: \n"+expense.getExpenseName().toString()+" \n"+"Expense date: \n"+
 	    	    	expense.getExpenseDate().toString()+
@@ -157,7 +164,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 	    	    message = claim_info.toString().replace("[", "").replace("]", "").replace(",", "");
 	    	    
 	    	    
-	    	    		
+	    	    // send email
 	    	    final Intent email = new Intent(Intent.ACTION_SEND);
 	    	    email.setType("text/plain");
 	    	    email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "rkdhatt@ualberta.ca"});
@@ -178,13 +185,13 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		
 	}
 	
-	// create add expense dialog
+	// Add expense dialog
 	@SuppressLint("InflateParams")
 	public void sendAddExpenseMessage(View view) {
 		LayoutInflater li = LayoutInflater.from(getBaseContext());
 		View addExpenseView = li.inflate(R.layout.add_expense_dialog, null);
 		
-		//EditTexts and spinner stuff from add_expense_dialog
+		//EditTexts and spinners from add_expense_dialog.xml
 		final EditText ex_name = (EditText) addExpenseView
 				.findViewById(R.id.expenseNameText);
 		final EditText ex_date = (EditText) addExpenseView
@@ -245,6 +252,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 							}
 							new_expense.setExpenseCurr(curr_selected);
 							selected_claim.addExpense(new_expense);
+							// notify update method from listener interface to save changes in expense and claim adapters.
 							ClaimListController.getClaimList().notifyListeners();
 							
 							Toast.makeText(getApplicationContext(), 
@@ -256,7 +264,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
+							//Do nothing
 						}
 					});
 		
@@ -264,24 +272,24 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		alertDialog.show();
 	}
 	
-	// create edit expense dialog
+	// Edit expense dialog
 	@SuppressLint("InflateParams")
 	public void sendEditExpenseMessage(final Expense edit_expense) {
 		LayoutInflater li = LayoutInflater.from(getBaseContext());
 		View editExpenseView = li.inflate(R.layout.edit_expense_dialog, null);
 		
-		//EditTexts and spinner stuff from add_expense_dialog
+		//EditTexts and spinners from edit_expense_dialog.xml
 		final EditText ex_name = (EditText) editExpenseView
-				.findViewById(R.id.expenseNameText);
+				.findViewById(R.id.expenseNameEdit);
 		ex_name.setHint("Name was: "+edit_expense.getExpenseName().toString());
 		final EditText ex_date = (EditText) editExpenseView
-				.findViewById(R.id.expenseDateText);
+				.findViewById(R.id.expenseDateEdit);
 		ex_date.setHint("Date was: "+edit_expense.getExpenseDate().toString());
 		final EditText ex_info = (EditText) editExpenseView
-				.findViewById(R.id.expenseInfoText);
+				.findViewById(R.id.expenseInfoEdit);
 		ex_info.setHint("Info was: "+edit_expense.getExpenseInfo().toString());
 		final EditText ex_amount = (EditText) editExpenseView
-				.findViewById(R.id.amountText);
+				.findViewById(R.id.amountEdit);
 		ex_amount.setHint("Price was: " +Float.valueOf(edit_expense.getExpenseAmt()).toString());
 		
 		Spinner cat_spinner = (Spinner) editExpenseView.findViewById(R.id.cat_spinner);
@@ -303,11 +311,13 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		AlertDialog.Builder Builder = new AlertDialog.Builder(ClaimInfoActivity.this);
 		Builder.setView(editExpenseView);
 		
+				
 				Builder.setCancelable(false)
 					.setPositiveButton("Save Changes", new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
+							// Save input into edit_expense
 							edit_expense.setExpenseName(ex_name.getText().toString());
 							edit_expense.setExpenseDate(ex_date.getText().toString());
 							edit_expense.setExpenseCat(cat_selected);
@@ -321,6 +331,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 							}
 							edit_expense.setExpenseCurr(curr_selected);
 							
+							// notify update method from listener interface to save changes in expense and claim adapters.
 							ClaimListController.getClaimList().notifyListeners();
 							
 							Toast.makeText(getApplicationContext(), 
@@ -331,7 +342,8 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
+							// Cancel
+							
 						}
 					});
 		
@@ -339,7 +351,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		alertDialog.show();
 	}
 	
-	// create delete expense dialog
+	// Delete expense dialog
 	private void sendDeleteExpenseMessage(Expense expense) {
 		
 		final Expense delete_expense = expense;
@@ -360,7 +372,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 				
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// Do Nothing
+				// Cancel
 			}
 		});
 		Builder.show();
@@ -387,6 +399,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		
 	}
 
+	// Making sure user selects a category and currency type
 	public void onNothingSelected(AdapterView<?> parent) {
         switch (parent.getId()) {
         

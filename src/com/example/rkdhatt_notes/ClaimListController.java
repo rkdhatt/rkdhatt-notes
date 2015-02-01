@@ -1,4 +1,5 @@
-/* Class for claims object.
+/* Controller for a list of claims that can be accessed in all activities. Used to access
+ *ClaimListManager to save, load, and initialize claim list.
  * 
  * 
  * 
@@ -29,6 +30,7 @@ public class ClaimListController {
 	
 	// Throw RuntimeEXception
 	// Need to have listener so that data can be saved
+	// Initializes a new claim or loads an existing list of claims
 	static public ClaimList getClaimList() {
 		if (claimList == null) {
 			try {
@@ -53,6 +55,7 @@ public class ClaimListController {
 		return claimList;	
 	}
 	
+	// Let manager know to save changes of claim list
 	static public void saveClaimList () {
 		try {
 			ClaimListManager.getManager().saveClaimList(getClaimList());
@@ -62,10 +65,12 @@ public class ClaimListController {
 		}
 	}
 
+	// grab claim list from manager to choose a claim
 	public Claim chooseClaim() throws IllegalStateException {
 		return getClaimList().chooseClaim();
 	}
 
+	// grab claim list from manager to add new claim
 	public void addClaim(Claim new_claim) {
 		getClaimList().addClaim(new_claim);
 	

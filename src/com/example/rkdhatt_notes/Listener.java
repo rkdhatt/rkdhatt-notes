@@ -1,4 +1,5 @@
 /* A listener interface which allows all activiies to be able to update any changes of claims or expenses.
+ * Required by ClaimListController so it can add a listener for the new claim list created by it.
  * Source: https://github.com/rjynn/student-picker/blob/master/src/ca/softwareprocess/studentpicker/Listener.java
  * 
  * 

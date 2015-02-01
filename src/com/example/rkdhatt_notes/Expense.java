@@ -1,4 +1,4 @@
-/* Class for expenses.
+/* Class for expenses containing setters and getters.
  * 
  * 
  * 
@@ -37,14 +37,6 @@ public class Expense{
 		Expense.ex_amount = amount;
 		Expense.ex_currency =currency;	
 	}
-	
-//	// need for the claim list view to show the name of the claim
-//	@Override
-//	public String toString() {
-//		String output = getExpenseName()+" : \nDate: "+ getExpenseDate() +
-//				"\nAmount: " + String.valueOf(getExpenseAmt())+" "+getExpenseCurr();
-//		return output;
-//	}
 	
 	// Create getter and setter methods for each private variable of expense.
 	public String getExpenseName() {

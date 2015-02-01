@@ -4,12 +4,12 @@
     android:layout_height="match_parent" >
     
         <EditText
-            android:id="@+id/expenseDateText"
+            android:id="@+id/expenseDateEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/expenseNameText"
+            android:layout_below="@+id/expenseNameEdit"
             android:ems="10"
             android:hint="New Date"
             android:inputType="date" />
@@ -24,7 +24,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/expenseNameText"
+        android:id="@+id/expenseNameEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -38,12 +38,12 @@
     </EditText>
 
     <TextView
-        android:id="@+id/currTextView"
+        android:id="@+id/currTextEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/catTextView"
+        android:layout_alignStart="@+id/catTextEdit"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/expenseInfoText"
+        android:layout_below="@+id/expenseInfoEdit"
         android:text="@string/ex_curr_str"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -52,12 +52,12 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/expenseDateText"
+        android:layout_below="@+id/expenseDateEdit"
         android:drawSelectorOnTop="true"
         android:entries="@array/category_array" />
 
     <TextView
-        android:id="@+id/catTextView"
+        android:id="@+id/catTextEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -69,7 +69,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/expenseInfoText"
+        android:id="@+id/expenseInfoEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -84,16 +84,16 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/currTextView"
+        android:layout_alignTop="@+id/currTextEdit"
         android:drawSelectorOnTop="true"
         android:entries="@array/currency_array" />
 
     <EditText
-        android:id="@+id/amountText"
+        android:id="@+id/amountEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/currTextView"
+        android:layout_below="@+id/currTextEdit"
         android:layout_toLeftOf="@+id/curr_spinner"
         android:ems="6"
         android:hint="New Price"

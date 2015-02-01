@@ -10,6 +10,5 @@
     <item android:id="@+id/statusSubmitted" android:onClick="submitClaim" android:title="@string/submit_string"></item>
     <item android:id="@+id/statusApproved" android:title="@string/approved_string" android:onClick="approveClaim"></item>
     <item android:id="@+id/statusReturned" android:title="@string/returned_string" android:onClick="returnClaim"></item>
-    <item android:id="@+id/emailClaim" android:title="@string/email_string"></item>
 
 </menu>

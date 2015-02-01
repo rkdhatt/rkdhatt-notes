@@ -1,5 +1,5 @@
-/* Manages the singleton claim list for all activities, loads and saves data of claim list.
- * Idea obtained from Student picker video: https://www.youtube.com/watch?v=gmNfc6u1qk0
+/* Manages the singleton claim list made by ClaimListController for all activities, loads and saves data of claim list.
+ * Idea obtained from Dr. Hindle's Student picker video: https://www.youtube.com/watch?v=gmNfc6u1qk0
  * 
  * 
  * 
@@ -59,13 +59,14 @@ public class ClaimListManager {
 		return claimListManager;
 	}
 	
-	
+	// Constructor
 	public ClaimListManager(Context context) {
 		super();
 		this.context = context;
 	}
 	
 
+	// Use SharedPreferences to load ClaimList information
 	public ClaimList loadClaimList() throws IOException, ClassNotFoundException {
 		SharedPreferences app_settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
 		String claimListData = app_settings.getString(clKey, "");
@@ -77,12 +78,14 @@ public class ClaimListManager {
 		}
 	}
 	
+	// Decoding before loading claim list
 	static public ClaimList claimListFromString(String claimListData) throws IOException, ClassNotFoundException {
 		ByteArrayInputStream bis = new ByteArrayInputStream(Base64.decode(claimListData, Base64.DEFAULT));
 		ObjectInputStream ois = new ObjectInputStream(bis);
 		return (ClaimList)ois.readObject();
 	}
 
+	// Use SharedPreferences to save ClaimList information
 	public void saveClaimList(ClaimList cl) throws IOException {
 		SharedPreferences app_settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
 		Editor editor = app_settings.edit();
@@ -90,6 +93,7 @@ public class ClaimListManager {
 		editor.commit();
 	}
 
+	// Encoding to string before saving claim list
 	static public String claimListToString(ClaimList cl) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
