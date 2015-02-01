@@ -198,7 +198,7 @@ public class ClaimsMainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		// action_settings2 is from menu/claims_main.xml
-		if (id == R.id.claim_action_settings) {
+		if (id == R.id.editClaimOption) {
 			return true;
 		}
 		
