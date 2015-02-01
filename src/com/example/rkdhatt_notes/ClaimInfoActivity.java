@@ -1,7 +1,10 @@
 /* An activity for expenses of corresponding claims and settings regarding claim status,
- * email claim information, edit/delete claims, and add/edit/delete expenses
+ * email claim information, edit/delete claims, and add/edit/delete expenses.
  * 
- * 
+ * Problems: Saving expenses and updating the listview is still an issue. Also, for some reason when editing one expense,
+ * the rest of the expenses save th same changes. Still need to fix. This results in sending only claim information and
+ * not expense infomation once you leave the app and come back to the ClaimInfoActivity. This also results in changing statuses of claims
+ * to not be saved throughout all activities, even though I have used toasts to show that changes have occurred.
  * 
  * Copyright (C) 2015 Ramandeep Dhatt rkdhatt@ulberta.ca
  * 
@@ -57,11 +60,11 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		setContentView(R.layout.claim_info);
 		ClaimListManager.initManager(this.getApplicationContext());
 		
+		// Gab selected claim from ClaimsMainActivity.java
 		Intent intent = getIntent();
 		selected_claim = (Claim) intent.getSerializableExtra("selected claim");
 		
 		// Create list view for expenses
-		
 		Collection<Claim> claims = ClaimListController.getClaimList().getClaims();
 		Collection<Expense> expenses = ClaimListController.getClaimList().selectExpense(selected_claim);
 		
@@ -73,9 +76,9 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
         ListView listView = (ListView) findViewById(R.id.expenseListView);
         
 		// want to only deal with the expense list from the selected claim and show it.
-		
 		listView.setAdapter(adapter);
 
+		
 		
 		ClaimListController.getClaimList().addListener(new Listener() {
 
@@ -106,17 +109,12 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 				builder.setMessage("Edit or Delete Expense?");
 				builder.setPositiveButton("Edit Expense", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-								Toast.makeText(getApplicationContext(), "Clicked Edit Expense!",
-					        			Toast.LENGTH_LONG).show();
 								sendEditExpenseMessage(expense);
 				           }
 				       });
 				
 				builder.setNeutralButton("Delete Expense", new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
-							Toast.makeText(getApplicationContext(), "Clicked Delete Expense!",
-				        			Toast.LENGTH_LONG).show();
-							
 							sendDeleteExpenseMessage(expense);
 			           }
 			       });
@@ -431,6 +429,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		
 	}
 	
+	// Returning claim - same issue as submit claim method
 	public void returnClaim(MenuItem item) {
 		
 		selected_claim.setStatusReturned();
@@ -444,16 +443,12 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.claim_info, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;

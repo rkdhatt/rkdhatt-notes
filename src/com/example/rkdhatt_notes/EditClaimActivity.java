@@ -1,4 +1,5 @@
-/* An activity for editting claim information and save changes. Also updates ListView
+/* An activity for editting claim information and save changes. Also updates ListView for Both activity_edit_claim.xml
+ * and activity_main.xml
  * 
  * 
  * 
@@ -82,18 +83,22 @@ public class EditClaimActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-				
+				final Claim claim = clist.get(position);
 				// Edit Texts from edit claim dialog
 				final EditText name = (EditText) editClaimView
 						.findViewById(R.id.editClaimName);
+				name.setHint("Name was: "+claim.getClaimName());
 				final EditText start = (EditText) editClaimView
 						.findViewById(R.id.editFromDateText);
+				start.setHint("Start date was: "+claim.getFromDate());
 				final EditText end = (EditText) editClaimView
 						.findViewById(R.id.editToDateText);
+				end.setHint("End date was: "+claim.getToDate());
 				final EditText info = (EditText) editClaimView
 						.findViewById(R.id.editClaimInfoText);
+				info.setHint("Info was: "+claim.getClaimDescription());
 				
-				final int finalPos = position;
+//				final int finalPos = position;
 				AlertDialog.Builder Builder = new AlertDialog.Builder(EditClaimActivity.this);
 				Builder.setView(editClaimView);
 				Builder.setCancelable(true);
@@ -101,7 +106,7 @@ public class EditClaimActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Claim claim = clist.get(finalPos);
+						
 						// check status of claim, if its submitted or approved, you cannot make changes
 						final String status = claim.getStatus();
 						
@@ -118,7 +123,7 @@ public class EditClaimActivity extends Activity {
 						
 						else {
 							// send toast message that the edit wasn't successful.
-							Toast.makeText(getApplicationContext(),"Edit wasn't successful",
+							Toast.makeText(getApplicationContext(),"Edit Claim wasn't successful due to Claim status",
 					    			Toast.LENGTH_LONG).show();
 						}
 					}

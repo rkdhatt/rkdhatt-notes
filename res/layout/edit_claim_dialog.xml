@@ -23,8 +23,8 @@
         android:layout_below="@+id/editClaimTextView"
         android:layout_marginTop="19dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="@string/new_cname_string" />
+        android:hint="New Claim Name"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/editFromDateText"
@@ -34,8 +34,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editClaimName"
         android:ems="10"
-        android:inputType="date"
-        android:text="@string/new_from_string" >
+        android:hint="New From Date (DD/MM/YYYY)"
+        android:inputType="date" >
 
         <requestFocus />
     </EditText>
@@ -48,8 +48,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editFromDateText"
         android:ems="10"
-        android:inputType="date"
-        android:text="@string/new_to_string" />
+        android:hint="New To Date (DD/MMMM/YYYY)"
+        android:inputType="date" />
 
     <EditText
         android:id="@+id/editClaimInfoText"
@@ -59,7 +59,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editToDateText"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:text="@string/edit_cinfo_string" />
+        android:hint="Edit Description"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>
