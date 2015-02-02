@@ -95,29 +95,29 @@ public class Claim implements Serializable{
 		return status;
 	}
 	
-	//make submit and approved constant somehow.
+	
 	public void setStatusInProgress(){
 		this.status = "in progress"; 	
 	}
 	
-	public final void setStatusSubmitted(){
+	public final void setStatusSubmitted(String string){
 		
 		// make sure status is not approved before submitting
 		if (this.getStatus() != "approved") {
-			this.status = "submitted";
+			this.status = string;
 		} 
 	}
 	
-	public void setStatusReturned(){
+	public void setStatusReturned(String string){
 		
 		// cannot return once approved
 		if (this.getStatus() != "approved") {
-			this.status = "returned";
+			this.status = string;
 		}
 	}
 	
-	public final void setStatusApproved(){
-		this.status = "approved";
+	public final void setStatusApproved(String string){
+		this.status = string;
 	}
 
 	public ArrayList<Expense> getExpenseList() {

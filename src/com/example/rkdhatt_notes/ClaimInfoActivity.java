@@ -438,7 +438,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 	// Submitting claim - does work, but when you go back to main claim activity it won't show changes
 	public void submitClaim (MenuItem menu){
 	
-		selected_claim.setStatusSubmitted();
+		selected_claim.setStatusSubmitted("submitted");
 		Toast.makeText(getApplicationContext(),selected_claim.getStatus(),
     			Toast.LENGTH_LONG).show();
 		
@@ -449,7 +449,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 	// Approving claim - same issue as submit claim method
 	public void approveClaim (MenuItem menu){
 	
-		selected_claim.setStatusApproved();
+		selected_claim.setStatusApproved("approved");
 		
 		Toast.makeText(getApplicationContext(),selected_claim.getStatus()+": Cannot return once approved.",
     			Toast.LENGTH_LONG).show();
@@ -461,7 +461,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 	// Returning claim - same issue as submit claim method
 	public void returnClaim(MenuItem item) {
 		
-		selected_claim.setStatusReturned();
+		selected_claim.setStatusReturned("returned");
 		
 		Toast.makeText(getApplicationContext(),selected_claim.getStatus()+". Cannot return once approved.",
     			Toast.LENGTH_LONG).show();
