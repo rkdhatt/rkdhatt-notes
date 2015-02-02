@@ -32,6 +32,7 @@ import java.util.Collection;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
@@ -53,9 +54,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ClaimInfoActivity extends Activity implements OnItemSelectedListener{
+	final Context context = this;
 	private String cat_selected;
 	private String curr_selected;
 	private Claim selected_claim;
+
+	private ListView listView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +78,13 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		final ArrayList<Expense> expenseList = new ArrayList<Expense>(expenses);
 		final ArrayList<Claim> clist = new ArrayList<Claim>(claims);
 		final ArrayAdapter<Claim> claimAdapter = new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1, clist);
-        final CustomExpenseListViewAdapter adapter = new CustomExpenseListViewAdapter(this,
+        final CustomExpenseListViewAdapter adapter = new CustomExpenseListViewAdapter(context,
                 R.layout.expense_items, expenseList);
-        ListView listView = (ListView) findViewById(R.id.expenseListView);
+        listView = (ListView) findViewById(R.id.expenseListView);
         
 		// want to only deal with the expense list from the selected claim and show it.
 		listView.setAdapter(adapter);
 
-		
-		
 		ClaimListController.getClaimList().addListener(new Listener() {
 
 			@Override
@@ -108,7 +110,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 					int position, long id) {
 				// grab expense item clicked on from its position
 				final Expense expense = expenseList.get(position);
-				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimInfoActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setMessage("Edit or Delete Expense?");
 				builder.setPositiveButton("Edit Expense", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
@@ -222,7 +224,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 		cat_spinner.setAdapter(cat_adapter);
 		curr_spinner.setAdapter(curr_adapter);
 		
-		AlertDialog.Builder Builder = new AlertDialog.Builder(ClaimInfoActivity.this);
+		AlertDialog.Builder Builder = new AlertDialog.Builder(context);
 		Builder.setView(addExpenseView);
 		
 		// Create cancel and save buttons, need to save data as well via files
@@ -251,7 +253,7 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 								
 							}
 							new_expense.setExpenseCurr(curr_selected);
-							selected_claim.addExpense(new_expense);
+							ClaimListController.getClaimList().getClaim(selected_claim).addExpense(new_expense);
 							// notify update method from listener interface to save changes in expense and claim adapters.
 							ClaimListController.getClaimList().notifyListeners();
 							
@@ -318,24 +320,31 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
 							// Save input into edit_expense
-							edit_expense.setExpenseName(ex_name.getText().toString());
-							edit_expense.setExpenseDate(ex_date.getText().toString());
-							edit_expense.setExpenseCat(cat_selected);
-							edit_expense.setExpenseInfo(ex_info.getText().toString());
-							try {
-							edit_expense.setExpenseAmt(Float.valueOf(ex_amount.getText().toString()));
-							} catch (NumberFormatException e) {
+							final String status = selected_claim.getStatus();
+							
+							if (status != "approved" && status != "submitted") {
+								edit_expense.setExpenseName(ex_name.getText().toString());
+								edit_expense.setExpenseDate(ex_date.getText().toString());
+								edit_expense.setExpenseCat(cat_selected);
+								edit_expense.setExpenseInfo(ex_info.getText().toString());
+								try {
+									edit_expense.setExpenseAmt(Float.valueOf(ex_amount.getText().toString()));
+								} catch (NumberFormatException e) {
+									Toast.makeText(getApplicationContext(), 
+											"Didn't add Price! Making default Price = 0.0", Toast.LENGTH_LONG).show();
+									edit_expense.setExpenseAmt(0);
+								}
+								edit_expense.setExpenseCurr(curr_selected);
+							
+								// notify update method from listener interface to save changes in expense and claim adapters.
+								ClaimListController.getClaimList().notifyListeners();
+							
 								Toast.makeText(getApplicationContext(), 
-										"Didn't add Price! Making default Price = 0.0", Toast.LENGTH_LONG).show();
-								edit_expense.setExpenseAmt(0);
+										"Expense successfully edited!", Toast.LENGTH_LONG).show();
+							} else {
+								Toast.makeText(getApplicationContext(),"Edit Expense wasn't successful due to Claim status = "+selected_claim.getStatus(),
+						    			Toast.LENGTH_LONG).show();
 							}
-							edit_expense.setExpenseCurr(curr_selected);
-							
-							// notify update method from listener interface to save changes in expense and claim adapters.
-							ClaimListController.getClaimList().notifyListeners();
-							
-							Toast.makeText(getApplicationContext(), 
-									"Expense successfully edited!", Toast.LENGTH_LONG).show();
 						}
 					})
 					
@@ -362,8 +371,15 @@ public class ClaimInfoActivity extends Activity implements OnItemSelectedListene
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				selected_claim.getExpenseList().remove(delete_expense);
-				ClaimListController.getClaimList().notifyListeners();
+				
+				final String status = selected_claim.getStatus();
+				if (status != "approved" && status != "submitted") {
+					selected_claim.getExpenseList().remove(delete_expense);
+					ClaimListController.getClaimList().notifyListeners(); 
+				} else {
+					Toast.makeText(getApplicationContext(),"Delete Expense wasn't successful due to Claim status = "+selected_claim.getStatus(),
+			    			Toast.LENGTH_LONG).show();
+				}
 			}
 				
 		});

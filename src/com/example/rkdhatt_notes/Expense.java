@@ -19,7 +19,11 @@
 
 package com.example.rkdhatt_notes;
 
-public class Expense{
+import java.io.Serializable;
+
+public class Expense implements Serializable{
+
+	private static final long serialVersionUID = 1344903020799401397L;
 	private static String ex_name = "unknown";
 	private static String ex_date = "unknown";
 	private static String ex_category = "unknown";

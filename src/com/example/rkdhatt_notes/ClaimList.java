@@ -79,7 +79,6 @@ public class ClaimList implements Serializable {
 
 	// Need to find the claim chosen by student first (find the right index)...
 	public Claim chooseClaim() throws IllegalStateException{
-		// Not sure what to do here
 		int size = claimList.size();
 		if (size <= 0) {
 			throw new IllegalStateException();
@@ -95,6 +94,13 @@ public class ClaimList implements Serializable {
 			}
 		}
 		return claimList.get(index);
+	}
+	
+	public Claim getClaim(Claim selected_claim) {
+		if (claimList.contains(selected_claim)) {
+			return selected_claim;
+		}
+		return selected_claim;
 	}
 	
 	public ArrayList<Expense> selectExpense(Claim claim) throws IllegalStateException{

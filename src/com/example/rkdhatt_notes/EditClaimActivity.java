@@ -97,8 +97,7 @@ public class EditClaimActivity extends Activity {
 				final EditText info = (EditText) editClaimView
 						.findViewById(R.id.editClaimInfoText);
 				info.setHint("Info was: "+claim.getClaimDescription());
-				
-//				final int finalPos = position;
+			
 				AlertDialog.Builder Builder = new AlertDialog.Builder(EditClaimActivity.this);
 				Builder.setView(editClaimView);
 				Builder.setCancelable(true);
@@ -115,15 +114,13 @@ public class EditClaimActivity extends Activity {
 							claim.setToDate(end.getText().toString());
 							claim.setClaimDescription(info.getText().toString());
 							claim.setClaimName(name.getText().toString());
-							claim.setStatusInProgress();
 						
-							
-							ClaimListController.getClaimList().notifyListeners(); // works omg!!!
+							ClaimListController.getClaimList().notifyListeners(); 
 						}
 						
 						else {
 							// send toast message that the edit wasn't successful.
-							Toast.makeText(getApplicationContext(),"Edit Claim wasn't successful due to Claim status",
+							Toast.makeText(getApplicationContext(),"Edit Claim wasn't successful due to Claim status= "+claim.getStatus(),
 					    			Toast.LENGTH_LONG).show();
 						}
 					}
