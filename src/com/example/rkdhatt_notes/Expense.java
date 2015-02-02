@@ -24,22 +24,22 @@ import java.io.Serializable;
 public class Expense implements Serializable{
 
 	private static final long serialVersionUID = 1344903020799401397L;
-	private static String ex_name = "unknown";
-	private static String ex_date = "unknown";
-	private static String ex_category = "unknown";
-	private static String ex_info = "unknown";
-	private static float ex_amount = 0;
-	private static String ex_currency = "unknown";
+	private String ex_name = "unknown";
+	private String ex_date = "unknown";
+	private String ex_category = "unknown";
+	private String ex_info = "unknown";
+	private float ex_amount = 0;
+	private String ex_currency = "unknown";
 	
 	// Expense constructor
 	public Expense (String name, String date, String category, String info, float amount, String currency) {
 		super();
-		Expense.ex_name = name;
-		Expense.ex_date = date;
-		Expense.ex_category = category;
-		Expense.ex_info = info;
-		Expense.ex_amount = amount;
-		Expense.ex_currency =currency;	
+		this.ex_name = name;
+		this.ex_date = date;
+		this.ex_category = category;
+		this.ex_info = info;
+		this.ex_amount = amount;
+		this.ex_currency =currency;	
 	}
 	
 	// Create getter and setter methods for each private variable of expense.
@@ -48,7 +48,7 @@ public class Expense implements Serializable{
 	}
 	
 	public void setExpenseName(String new_name) {
-		Expense.ex_name = new_name;
+		this.ex_name = new_name;
 	}
 	
 	public String getExpenseDate()  {
@@ -56,7 +56,7 @@ public class Expense implements Serializable{
 	}
 	
 	public void setExpenseDate(String string) {
-		Expense.ex_date = string;
+		this.ex_date = string;
 	}
 	
 	public String getExpenseCat() {
@@ -64,7 +64,7 @@ public class Expense implements Serializable{
 	}
 	
 	public void setExpenseCat(String new_category) {
-		Expense.ex_category = new_category;
+		this.ex_category = new_category;
 	}
 	
 	public String getExpenseInfo() {
@@ -72,7 +72,7 @@ public class Expense implements Serializable{
 	}
 	
 	public void setExpenseInfo(String new_info) {
-		Expense.ex_info = new_info;
+		this.ex_info = new_info;
 	}
 	
 	public float getExpenseAmt() {
@@ -80,7 +80,7 @@ public class Expense implements Serializable{
 	}
 	
 	public void setExpenseAmt(float new_amount) {
-		Expense.ex_amount = new_amount;
+		this.ex_amount = new_amount;
 	}
 	
 	public String getExpenseCurr() {
@@ -88,6 +88,6 @@ public class Expense implements Serializable{
 	}
 	
 	public void setExpenseCurr(String new_currency) {
-		Expense.ex_currency = new_currency;
+		this.ex_currency = new_currency;
 	}
 }

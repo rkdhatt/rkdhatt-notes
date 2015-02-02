@@ -38,7 +38,7 @@ public class Claim implements Serializable{
 	private String status = "in progress";
 	
 	// A claim is associated with expenses, so need to allocate space for expenses
-	private ArrayList<Expense> expense_list = new ArrayList<Expense>();
+	private static ArrayList<Expense> expense_list = new ArrayList<Expense>();
 	
 	public Claim (String from_date, String to_date, String describe_claim, String c_name, String status, ArrayList<Expense> expense_list) {
 		super();
@@ -47,7 +47,7 @@ public class Claim implements Serializable{
 		this.describe_claim = describe_claim;
 		this.c_name = c_name;
 		this.status = status;
-		this.expense_list = expense_list;
+		Claim.expense_list = expense_list;
 	}
 	
 
@@ -125,11 +125,11 @@ public class Claim implements Serializable{
 	}
 	
 	public void setExpenseList(ArrayList<Expense> expense_list) {
-		this.expense_list = expense_list;
+		Claim.expense_list = expense_list;
 	}
 
 	public void addExpense(Expense new_expense) {
-		this.expense_list.add(new_expense);
+		Claim.expense_list.add(new_expense);
 	}
 	
 	// confirm that an expense exists (making sure an expense has been added to a selected claim)
